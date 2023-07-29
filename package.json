@@ -7,15 +7,17 @@
     "start": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production&&nodemon server.js",
     "debug": "ndb server.js"
-    
   },
   "author": "Nitesh Tiwari",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
     "mongoose": "^5.13.17",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.3",
     "nodemon": "^3.0.0",
     "slugify": "^1.6.6",
     "validator": "^13.9.0"

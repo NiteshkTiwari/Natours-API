@@ -13,6 +13,6 @@ router.patch('/resetPassword/:token', authcontroller.resetPassword);
 
 router.route("/").get(userController.getAllUser).post(userController.createUser);
 
-router.route("/:id").get(userController.getUser).patch(userController.updateUser).delete(userController.deleteUser);
+router.route("/:id").get(userController.getUser).patch(userController.updateUser).delete(authcontroller.protect,authcontroller.restrictTo('admin','lead-guide'),userController.deleteUser);
 
 module.exports = router;

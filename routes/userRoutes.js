@@ -7,18 +7,29 @@ const router = express.Router();
 
 router.post('/signup', authcontroller.signup);
 router.post('/login', authcontroller.login);
-
 router.post('/forgotPassword', authcontroller.forgotPassword);
 router.patch('/resetPassword/:token', authcontroller.resetPassword);
 
-router.patch('/updateMyPassword', authcontroller.protect, authcontroller.updatePassword);
+//Protect all routes after this middleware
+router.use(authcontroller.protect);
 
-router.patch('/updateMe', authcontroller.protect, userController.updateMe);
+router.patch('/updateMyPassword',authcontroller.updatePassword);
+router.patch('/updateMe', userController.updateMe);
+router.get('/me',userController.getMe,userController.getUser);
+router.delete('/deleteMe', userController.deleteMe);
 
-router.delete('/deleteMe', authcontroller.protect, userController.deleteMe);
 
-router.route("/").get(userController.getAllUser).post(userController.createUser);
+router.use(authcontroller.restrictTo('admin'));
 
-router.route("/:id").get(userController.getUser).patch(userController.updateUser).delete(authcontroller.protect,authcontroller.restrictTo('admin','lead-guide'),userController.deleteUser);
+router
+  .route('/')
+  .get(userController.getAllUser)
+  .post(userController.createUser);
+
+router
+    .route("/:id")
+    .get(userController.getUser)
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
 
 module.exports = router;

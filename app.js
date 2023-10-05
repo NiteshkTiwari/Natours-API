@@ -7,9 +7,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const globalErrorHandler = require('./controllers/errorController');
 const morgan = require('morgan');
+
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -58,7 +60,7 @@ app.use(hpp({
 }));
 
 
-console.log(process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development')
 {
     app.use(morgan("dev"));
@@ -76,7 +78,7 @@ if (process.env.NODE_ENV === 'development')
 //   next();
 // });
 
-
+app.use(compression());
 
 
 

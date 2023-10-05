@@ -27,7 +27,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
   
-  console.log("HWloo");
+  
   await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
@@ -65,7 +65,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, 'name', 'email');
   if (req.file) filteredBody.photo = req.file.filename;
   
-  console.log("hello");
+  
   //3.Update the user data
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

@@ -5,7 +5,7 @@ const Tour = require('./../../models/tourModel');
 const Review = require('./../../models/reviewModel');
 const User = require('./../../models/userModel');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './configg.env' });
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
